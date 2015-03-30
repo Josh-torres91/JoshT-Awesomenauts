@@ -4,7 +4,23 @@ var game = {
     // an object where to store game information
     data: {
         // score
-        score: 0
+        score: 0,
+        enemyBaseHealth: 10,
+        playerBasehealth: 10,
+        enemyCreepHealth: 10,
+        playerHealth: 10,
+        enemyCreepAttack: 1,
+        playerAttack: 1,
+//        orcBaseDamage: 10,
+//        orcBaseHealth: 10,
+//        orcBaseSpeed: 3,
+//        orcBaseDefense: 0,
+        playerAttackTimer: 1000,
+        enemyCreepAttackTimer: 1000,
+        playerMoveSpeed: 5,
+        creepMoveSpeed: 5,
+        gameManager:  "",
+        player: "",
     },
     // Run on page load.
     "onload": function() {
