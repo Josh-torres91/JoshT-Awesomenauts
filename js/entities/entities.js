@@ -31,9 +31,6 @@ game.PlayerEntity = me.Entity.extend({
         this.now = new Date().getTime();
         if (this.health <=0) {
             this.dead = true;
-            this.pos.x = 10;
-            this.pos.y = 0;
-            this.health = game.data.playerHealth;
         }
         
         
@@ -325,6 +322,11 @@ game.GameManager = Object.extend({
     },
     update: function() {
         this.now = new Date().getTime();
+
+        if (game.data.player.dead) {
+            me.game.world.removeChild(game.data.player);
+            me.state.current().resetPlayer(0, 420);
+        }
 
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
             // Math.round is a function that checks
