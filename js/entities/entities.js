@@ -227,7 +227,7 @@ game.EnemyCreep = me.Entity.extend({
                     return (new me.Rect(0, 0, 32, 64)).toPolygon();
                 }
             }]);
-        this.health = enemyCreepHealth;
+        this.health = CreepHealth;
         this.alwaysUpdate = true;
         // this.attacking lets us know if
         // the enemy is attacking.
