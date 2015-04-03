@@ -20,6 +20,8 @@ game.PlayerEntity = me.Entity.extend({
         this.facing = "right";
         this.now = new Date().getTime();
         this.lastHit = this.now;
+        this.dead = false;
+        this.attack = game.data.playerAttack;
         this.lastAttack = new Date().getTime();
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
         this.renderable.addAnimation("idle", [78]);
@@ -49,7 +51,6 @@ game.PlayerEntity = me.Entity.extend({
         } else {
             this.body.vel.x = 0;
         }
-
         if (me.input.isKeyPressed("'jump") && this.jumping && !this.falling) {
             this.jumping = true;
             this.body.vel.y -= this.body.accel.y * me.timer.tick;
@@ -125,9 +126,18 @@ game.PlayerEntity = me.Entity.extend({
             }
             if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer 
                    && (Math.abs(ydif) <=40) && 
-                   ((xdif>0 ) && yhis.facing==="left") || ((xdif<0) && this.facing==="right")
+                   ((xdif>0 ) && ydif.facing==="left") || ((xdif<0) && this.facing==="right")
                    ){
                 this.lastHit = this.now;
+                // If the creep's health is less 
+                // than our attack, execute code in if statement.
+                if(response.b.health <= game.data.playerAttack) {
+                    // Every time you kill a creep
+                    // you get one piece of gold.
+                    game.data.gold += 1;
+                    console.log("Current gold:" + game.data.gold);
+                }
+                
                 response.b.loseHealth(game.data.playerAttack);
             } 
         }
@@ -227,7 +237,7 @@ game.EnemyCreep = me.Entity.extend({
                     return (new me.Rect(0, 0, 32, 64)).toPolygon();
                 }
             }]);
-        this.health = CreepHealth;
+        this.health = game.data.enemyCreepHealth;
         this.alwaysUpdate = true;
         // this.attacking lets us know if
         // the enemy is attacking.
@@ -316,8 +326,7 @@ game.GameManager = Object.extend({
     init: function(x, y, settings) {
         this.now = new Date().getTime();
         this.lastCreep = new Date().getTime();
-
-
+        this.paused = false;
         this.alwaysUpdate = true;
     },
     update: function() {
@@ -327,7 +336,10 @@ game.GameManager = Object.extend({
             me.game.world.removeChild(game.data.player);
             me.state.current().resetPlayer(0, 420);
         }
-
+        if (Math.round(this.now / 1000) %20 === 0 && (this.now - this.lastCreep >= 1000)) {
+               game.data.gold += 1;
+               console.log("Current gold:" + game.data.gold);
+        }
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
             // Math.round is a function that checks
             //  if we have a multiple of ten.
