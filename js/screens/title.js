@@ -11,12 +11,12 @@
         me.game.world.addChild(new (me.Renderable.extend({
             init: function(){
                 this._super(me.Renderable, 'init', [510, 30, me.game.viewport.width, me.game.viewport.height]);
-                this.font = new me.Font("New Times Roman", 46, "black");
+                this.font = new me.Font("Press Start 2P", 46, "White");
             },
             
             draw: function(renderer) {
-                this.font.draw(renderer.getContext(), "Awesomenauts: Rebirth", 450, 130);
-                this.font.draw(renderer.getContext(), "Press ENTER to play!", 250, 530);
+                this.font.draw(renderer.getContext(), "Awesomenauts: Rebirth", 320, 130);
+                this.font.draw(renderer.getContext(), "Press ENTER to play!", 335, 230);
             }
         })));
         
