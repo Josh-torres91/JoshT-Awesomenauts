@@ -10,7 +10,7 @@ game.GameManager = Object.extend({
 
         if (game.data.player.dead) {
             me.game.world.removeChild(game.data.player);
-            me.state.current().resetPlayer(0, 420);
+            me.state.current().resetPlayer(0, 550);
         }
         
         if (Math.round(this.now / 1000) %20 === 0 && (this.now - this.lastCreep >= 1000)) {
@@ -23,7 +23,7 @@ game.GameManager = Object.extend({
             //  if we have a multiple of ten.
             this.lastCreep = this.now;
             var creepe = me.pool.pull("EnemyCreep", 100, 0, {});
-            me.game.world.addChild(creepe, 5);
+            me.game.world.addChild(creepe, 730);
         }
 
         return true;

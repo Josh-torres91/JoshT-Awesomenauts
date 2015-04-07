@@ -1,6 +1,6 @@
 game.PlayerEntity = me.Entity.extend({
     init: function(x, y, settings) {
-        this.setSuper();
+        this.setSuper(x, y);
         this.setPlayerTimers();
         this.setAttributes();
         this.type = "PlayerEntity";
@@ -16,7 +16,7 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable.setCurrentAnimation("idle");
     },
     
-    setSuper: function() {
+    setSuper: function(x, y) {
         this._super(me.Entity, 'init', [x, y, {
                 image: "player",
                 width: 64,
@@ -59,8 +59,8 @@ game.PlayerEntity = me.Entity.extend({
     
     update: function(delta) {
         this.now = new Date().getTime();
-        this.dead = checkIfDead();
-        this.checkKeyPressesAndMove();
+        this.dead = this.checkIfDead();
+        this.checkKeyPressedAndMove();
         this.setAnimation();
         me.collision.check(this, true, this.collideHandler.bind(this), true);
         this.body.update(delta);
@@ -83,10 +83,11 @@ game.PlayerEntity = me.Entity.extend({
         } else {
             this.body.vel.x = 0;
         }
-        if (me.input.isKeyPressed("'jump") && !this.jumping && !this.falling) {
+        
+        if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
             this.jump();
         }
-        this.attackinig = me.input.isKeyPressed("attack");
+        this.attacking = me.input.isKeyPressed("attack");
     },
     
     moveRight: function() {
@@ -106,6 +107,7 @@ game.PlayerEntity = me.Entity.extend({
     },
     
     jump: function() {
+        console.log("jump"); 
         this.body.jumping = true;
         this.body.vel.y -= this.body.accel.y * me.timer.tick;
     },
@@ -142,7 +144,7 @@ game.PlayerEntity = me.Entity.extend({
         if (response.b.type === 'EnemyBaseEntity') {
             this.collideWithEnemyBase(response);
         } else if (response.b.type === 'EnemyCreep') {
-            this.collide
+            this.collide;
         }
     },
     

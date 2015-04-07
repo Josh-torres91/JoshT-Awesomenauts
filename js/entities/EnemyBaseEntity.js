@@ -22,10 +22,15 @@ game.EnemyBaseEntity = me.Entity.extend({
         this.renderable.addAnimation("broken", [1]);
         this.renderable.setCurrentAnimation("idle");
     },
+    
+    loseHealth: function(damage) {
+        this.health = this.health - damage;
+    },
+    
     update: function(delta) {
         if (this.health <= 0) {
             this.broken = true;
-            this.renderable.seCurrentAnimation("broken");
+            this.renderable.setCurrentAnimation("broken");
         }
         this.body.update(delta);
         this._super(me.Entity, "update", [delta]);
