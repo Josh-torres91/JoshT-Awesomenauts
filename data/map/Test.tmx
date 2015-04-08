@@ -26,7 +26,7 @@
    </properties>
   </tile>
  </tileset>
- <imagelayer name="Image Layer " x="-151" y="-45">
+ <imagelayer name="Image Layer " x="-109" y="-30">
   <image source="../img/Reach_N1.jpg"/>
  </imagelayer>
  <objectgroup name="BaseEntities">
