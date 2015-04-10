@@ -175,13 +175,7 @@ game.PlayerEntity = me.Entity.extend({
             this.stopMovement(xdif);
                 
         if (this.checkAttack(xdif, ydif )){
-            if (response.b.health <= game.data.playerAttack) {
-                // Adds one gold for a creep kill
-                game.data.gold += 1;
-                console.log("Current gold: " + game.data.gold);
-        }
-
-        response.b.loseHealth(game.data.playerAttack);
+           this.hitCreep(response); 
         };
         },
     
@@ -199,12 +193,22 @@ game.PlayerEntity = me.Entity.extend({
     
     checkAttack: function(xdif, ydif) {
         if (this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
-        && (Math.abs(ydif) <= 40) &&
-        (((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right")
-        )(
+                && (Math.abs(ydif) <= 40) &&
+                (((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
+                ){
             this.lastHit = this.now;
             return true;
         }
         return false;
+    },
+    
+    hitCreep: function(response) {
+        if (response.b.health <= game.data.playerAttack) {
+                // Adds one gold for a creep kill
+                game.data.gold += 1;
+                console.log("Current gold: " + game.data.gold);
+            }
+
+            response.b.loseHealth(game.data.playerAttack);
     }
-});
+}); 

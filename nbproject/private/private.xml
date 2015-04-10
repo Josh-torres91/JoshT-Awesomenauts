@@ -5,9 +5,13 @@
         <group>
             <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/screens/title.js</file>
             <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/entities/GameManager.js</file>
+            <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/resources.js</file>
             <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/entities/EnemyCreep.js</file>
             <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/entities/entities.js</file>
             <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/entities/PlayerBaseEntity.js</file>
+            <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/entities/EnemyBaseEntity.js</file>
+            <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/screens/play.js</file>
+            <file>file:/C:/xampp/htdocs/JoshT-Awesomenauts/js/game.js</file>
         </group>
     </open-files>
 </project-private>
