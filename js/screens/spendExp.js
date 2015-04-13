@@ -7,13 +7,15 @@ game.SpendExp = me.ScreenObject.extend({
 
         me.game.world.addChild(new (me.Renderable.extend({
             init: function() {
-                this._super(me.Renderable, 'init', [335, 240, 300, 50]);
+                this._super(me.Renderable, 'init', [10, 10, 300, 50]);
                 this.font = new me.Font("Press Start 2P", 46, "White");
 
             },
             draw: function(renderer) {
-                this.font.draw(renderer.getContext(), "Start A New Game?", this.pos.x, this.pos.y);
+                this.font.draw(renderer.getContext(), "Press F1-F4 to buy abilities, F5 to continue your campaign.", this.pos.x, this.pos.y);
+                this.font.draw(renderer.getContext(), "Current XP: " + game.data.exp.toString(), this.pos.x + 95, this.pos.y + 50);
             }
+            
             
         })));
 
