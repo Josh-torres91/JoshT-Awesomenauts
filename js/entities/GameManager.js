@@ -25,7 +25,7 @@ game.GameTimerManager = Object.extend({
             //  if we have a multiple of ten.
             this.lastCreep = this.now;
             var creepe = me.pool.pull("EnemyCreep", 100, 0, {});
-            me.game.world.addChild(creepe, 730);
+            me.game.world.addChild(creepe, 2500);
         }
     }
 });
