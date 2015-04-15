@@ -14,7 +14,7 @@ game.GameTimerManager = Object.extend({
     },
     goldTimerCheck: function() {
         if (Math.round(this.now / 1000) % 20 === 0 && (this.now - this.lastCreep >= 1000)) {
-            game.data.gold += 1;
+            game.data.gold += (game.data.exp1 +1);
             console.log("Current gold:" + game.data.gold);
         }
     },
@@ -43,29 +43,38 @@ game.HeroDeathManager = Object.extend({
 });
 
 game.ExperienceManager = Object.extend({
-    init: function(x, y, settings){
+    init: function(x, y, settings) {
         this.alwaysUpdate = true;
         this.gameover = false;
     },
-    
-    update: function(){
-        if(game.data.win === true && !this.gameover){
+    update: function() {
+        if (game.data.win === true && !this.gameover) {
             this.gameOver(true);
-        }else if(game.data.win === false && !this.gameover){
+        } else if (game.data.win === false && !this.gameover) {
             this.gameOver(false);
         }
 
         return true;
     },
-    
     gameOver: function(win) {
-        if(win){
+        if (win) {
             game.data.exp += 10;
-        }else{
+        } else {
             game.data.exp += 1;
         }
         console.log(game.data.exp);
         this.gameover = true;
         me.save.exp = game.data.exp;
+    }
+});
+
+game.SpendGold = Object.extend({
+    init: function(x, y, settings) {
+        this.now = new Date().getTime();
+        this.lastBuy = new Date().getTime();
+        this.paused = false;
+   },
+    update: function() {
+        return true;
     }
 });

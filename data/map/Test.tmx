@@ -29,7 +29,7 @@
  <tileset firstgid="175" name="background-tiles-2" tilewidth="70" tileheight="70">
   <image source="../img/background-tiles-2.png" width="600" height="1000"/>
  </tileset>
- <imagelayer name="Image Layer " x="44" y="-75">
+ <imagelayer name="Image Layer " x="40" y="-47">
   <image source="../img/Reach_N1.jpg"/>
  </imagelayer>
  <objectgroup name="BaseEntities">
