@@ -24,13 +24,20 @@ var game = {
         player: "",
         exp: 0,
         gold: 0,
+        Upgrade1: 0,
+        Upgrade2: 0,
+        Upgrade3: 0,
+        Ability1: 0,
+        Ability2: 0,
+        Ability3: 0,
         exp1: 0,
         exp2: 0,
         exp3: 0,
         exp4: 0,
         win: "",
         pausePos: "",
-        buyscreen: ""
+        buyscreen: "",
+        buytext: ""
         
     },
     // Run on page load.
