@@ -1,34 +1,3 @@
-game.GameTimerManager = Object.extend({
-    init: function(x, y, settings) {
-        this.now = new Date().getTime();
-        this.lastCreep = new Date().getTime();
-        this.paused = false;
-        this.alwaysUpdate = true;
-    },
-    update: function() {
-        this.now = new Date().getTime();
-        this.goldTimerCheck();
-        this.creepTimerCheck();
-
-        return true;
-    },
-    goldTimerCheck: function() {
-        if (Math.round(this.now / 1000) % 20 === 0 && (this.now - this.lastCreep >= 1000)) {
-            game.data.gold += (game.data.exp1 + 1);
-            console.log("Current gold:" + game.data.gold);
-        }
-    },
-    creepTimerCheck: function() {
-        if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
-            // Math.round is a function that checks
-            //  if we have a multiple of ten.
-            this.lastCreep = this.now;
-            var creepe = me.pool.pull("EnemyCreep", 100, 0, {});
-            me.game.world.addChild(creepe, 2500);
-        }
-    }
-});
-
 game.HeroDeathManager = Object.extend({
     init: function(x, y, settings) {
         this.alwaysUpdate = true;
@@ -72,9 +41,11 @@ game.SpendGold = Object.extend({
         this.paused = false;
         this.alwaysUpdate = true;
         this.updateWhenPaused = true;
+        this.buying = false;
     },
     update: function() {
         this.now = new Date().getTime();
+
         if (me.input.isKeyPressed("buy") && this.now - this.lastBuy >= 1000) {
             this.lastBuy = this.now;
             if (!this.buying) {
@@ -84,6 +55,8 @@ game.SpendGold = Object.extend({
             }
 
         }
+
+        this.checkBuyKeys();
 
         return true;
     },
@@ -115,16 +88,16 @@ game.SpendGold = Object.extend({
             },
             draw: function(renderer) {
                 this.font.draw(renderer.getContext(), "Press F1-F6 to buy abilities, Press B to continue your campaign. Current Gold:" + game.data.gold, this.pos.x, this.pos.y);
-                this.font.draw(renderer.getContext(), "Upgrade 1: Damage Boost: Current Level:" + game.data.Upgrade1 + " Cost:" + ((game.data.Upgrade1+1)*10),this.pos.x, this.pos.y + 40);
-                this.font.draw(renderer.getContext(), "Upgrade 2: Marathon: Current Level:", + game.data.Upgrade2 + " Cost:" + ((game.data.Upgrade2+1)*10), this.pos.x, this.pos.y + 80);
-                this.font.draw(renderer.getContext(), "Upgrade 3: Cosmic Health: Current Level:", + game.data.Upgrade3 + " Cost:" + ((game.data.Upgrade3+1)*10),this.pos.x, this.pos.y + 120);
-                this.font.draw(renderer.getContext(), "A Ability: Agility: Current Level:", + game.data.Ability1 + " Cost:" + ((game.data.Ability1+1)*10),this.pos.x, this.pos.y + 160);
-                this.font.draw(renderer.getContext(), "S Ability: Bane of Creeps: Current Level:", + game.data.Ability2 + " Cost:" + ((game.data.Ability2+1)*10),this.pos.x, this.pos.y + 200);
-                this.font.draw(renderer.getContext(), "D Ability: Spartan Throw: Current Level:", + game.data.Ability3 + " Cost:" + ((game.data.Ability3+1)*10),this.pos.x, this.pos.y + 240);
-                
-                
-                
-                
+                this.font.draw(renderer.getContext(), "Upgrade 1: Damage Boost: Current Level:" + game.data.Upgrade1 + " Cost:" + ((game.data.Upgrade1 + 1) * 10), this.pos.x, this.pos.y + 40);
+                this.font.draw(renderer.getContext(), "Upgrade 2: Marathon: Current Level:", +game.data.Upgrade2 + " Cost:" + ((game.data.Upgrade2 + 1) * 10), this.pos.x, this.pos.y + 80);
+                this.font.draw(renderer.getContext(), "Upgrade 3: Cosmic Health: Current Level:", +game.data.Upgrade3 + " Cost:" + ((game.data.Upgrade3 + 1) * 10), this.pos.x, this.pos.y + 120);
+                this.font.draw(renderer.getContext(), "A Ability: Agility: Current Level:", +game.data.Ability1 + " Cost:" + ((game.data.Ability1 + 1) * 10), this.pos.x, this.pos.y + 160);
+                this.font.draw(renderer.getContext(), "S Ability: Bane of Creeps: Current Level:", +game.data.Ability2 + " Cost:" + ((game.data.Ability2 + 1) * 10), this.pos.x, this.pos.y + 200);
+                this.font.draw(renderer.getContext(), "D Ability: Spartan Throw: Current Level:", +game.data.Ability3 + " Cost:" + ((game.data.Ability3 + 1) * 10), this.pos.x, this.pos.y + 240);
+
+
+
+
             }
         }));
         me.game.world.addChild(game.data.buytext, 35);
@@ -141,7 +114,73 @@ game.SpendGold = Object.extend({
         me.input.unbindKey(me.input.KEY.F5, "F5", true);
         me.input.unbindKey(me.input.KEY.F6, "F6", true);
         me.game.world.removeChild(game.data.buytext);
-    }
+    },
+    checkBuyKeys: function() {
+        if (me.input.isKeyPressed("F1")) {
+            if (this.checkCost(1)) {
+                this.makePurchase(1);
+            }
+        } else if (me.input.isKeyPressed("F2")) {
+            if (this.checkCost(2)) {
+                this.makePurchase(2);
+            }
+        } else if (me.input.isKeyPressed("F3")) {
+            if (this.checkCost(3)) {
+                this.makePurchase(3);
+            }
+        } else if (me.input.isKeyPressed("F4")) {
+            if (this.checkCost(4)) {
+                this.makePurchase(4);
+            }
+        } else if (me.input.isKeyPressed("F5")) {
+            if (this.checkCost(5)) {
+                this.makePurchase(5);
+            }
+        } else if (me.input.isKeyPressed("F6")) {
+            if (this.checkCost(6)) {
+                this.makePurchase(6);
+            }
+        }
+    },
+    checkCost: function(skill) {
+        if (skill === 1 && (game.data.gold >= ((gamme.data.skill1 + 1) * 10))) {
+            return true;
+        } else if (skill === 2 && (game.data.gold >= ((gamme.data.skill2 + 1) * 10))) {
+            return true;
+        } else if (skill === 3 && (game.data.gold >= ((gamme.data.skill3 + 1) * 10))) {
+            return true;
+        } else if (skill === 4 && (game.data.gold >= ((gamme.data.ability1 + 1) * 10))) {
+            return true;
+        } else if (skill === 5 && (game.data.gold >= ((gamme.data.ability2 + 1) * 10))) {
+            return true;
+        } else if (skill === 6 && (game.data.gold >= ((gamme.data.ability3 + 1) * 10))) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    makePurchase: function(skill) {
+        if (skill === 1) {
+            game.data.gold -= ((game.data.skill1 + 1) * 10);
+            game.data.skill1 += 1;
+            game.data.playerAttack += 1;
+        } else if (skill === 2) {
+            game.data.gold -= ((game.data.skill2 + 1) * 10);
+            game.data.skill2 += 1;
+        } else if (skill === 3) {
+            game.data.gold -= ((game.data.skill3 + 1) * 10);
+            game.data.skill3 += 1;
+        } else if (skill === 4) {
+            game.data.gold -= ((game.data.ability1 + 1) * 10);
+            game.data.ability1 += 1;
+        } else if (skill === 5) {
+            game.data.gold -= ((game.data.ability2 + 5) * 10);
+            game.data.ability2 += 1;
+        } else if (skill === 6) {
+            game.data.gold -= ((game.data.aability3 + 6) * 10);
+            game.data.ability3 += 1;
+        }
 
+    }
 
 });
