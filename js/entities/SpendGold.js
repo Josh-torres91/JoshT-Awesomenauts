@@ -1,39 +1,3 @@
-game.HeroDeathManager = Object.extend({
-    init: function(x, y, settings) {
-        this.alwaysUpdate = true;
-    },
-    update: function() {
-        if (game.data.player.dead) {
-            me.game.world.removeChild(game.data.player);
-            me.state.current().resetPlayer(0, 550);
-        }
-    }
-});
-game.ExperienceManager = Object.extend({
-    init: function(x, y, settings) {
-        this.alwaysUpdate = true;
-        this.gameover = false;
-    },
-    update: function() {
-        if (game.data.win === true && !this.gameover) {
-            this.gameOver(true);
-        } else if (game.data.win === false && !this.gameover) {
-            this.gameOver(false);
-        }
-
-        return true;
-    },
-    gameOver: function(win) {
-        if (win) {
-            game.data.exp += 10;
-        } else {
-            game.data.exp += 1;
-        }
-        console.log(game.data.exp);
-        this.gameover = true;
-        me.save.exp = game.data.exp;
-    }
-});
 game.SpendGold = Object.extend({
     init: function(x, y, settings) {
         this.now = new Date().getTime();
@@ -89,11 +53,11 @@ game.SpendGold = Object.extend({
             draw: function(renderer) {
                 this.font.draw(renderer.getContext(), "Press F1-F6 to buy abilities, Press B to continue your campaign. Current Gold:" + game.data.gold, this.pos.x, this.pos.y);
                 this.font.draw(renderer.getContext(), "Upgrade 1: Damage Boost: Current Level:" + game.data.Upgrade1 + " Cost:" + ((game.data.Upgrade1 + 1) * 10), this.pos.x, this.pos.y + 40);
-                this.font.draw(renderer.getContext(), "Upgrade 2: Marathon: Current Level:", +game.data.Upgrade2 + " Cost:" + ((game.data.Upgrade2 + 1) * 10), this.pos.x, this.pos.y + 80);
-                this.font.draw(renderer.getContext(), "Upgrade 3: Cosmic Health: Current Level:", +game.data.Upgrade3 + " Cost:" + ((game.data.Upgrade3 + 1) * 10), this.pos.x, this.pos.y + 120);
-                this.font.draw(renderer.getContext(), "A Ability: Agility: Current Level:", +game.data.Ability1 + " Cost:" + ((game.data.Ability1 + 1) * 10), this.pos.x, this.pos.y + 160);
-                this.font.draw(renderer.getContext(), "S Ability: Bane of Creeps: Current Level:", +game.data.Ability2 + " Cost:" + ((game.data.Ability2 + 1) * 10), this.pos.x, this.pos.y + 200);
-                this.font.draw(renderer.getContext(), "D Ability: Spartan Throw: Current Level:", +game.data.Ability3 + " Cost:" + ((game.data.Ability3 + 1) * 10), this.pos.x, this.pos.y + 240);
+                this.font.draw(renderer.getContext(), "Upgrade 2: Marathon: Current Level:" + game.data.Upgrade2 + " Cost:" + ((game.data.Upgrade2 + 1) * 10), this.pos.x, this.pos.y + 80);
+                this.font.draw(renderer.getContext(), "Upgrade 3: Cosmic Health: Current Level:" + game.data.Upgrade3 + " Cost:" + ((game.data.Upgrade3 + 1) * 10), this.pos.x, this.pos.y + 120);
+                this.font.draw(renderer.getContext(), "A Ability: Agility: Current Level:" + game.data.Ability1 + " Cost:" + ((game.data.Ability1 + 1) * 10), this.pos.x, this.pos.y + 160);
+                this.font.draw(renderer.getContext(), "S Ability: Bane of Creeps: Current Level:" + game.data.Ability2 + " Cost:" + ((game.data.Ability2 + 1) * 10), this.pos.x, this.pos.y + 200);
+                this.font.draw(renderer.getContext(), "D Ability: Spartan Throw: Current Level:" + game.data.Ability3 + " Cost:" + ((game.data.Ability3 + 1) * 10), this.pos.x, this.pos.y + 240);
 
 
 

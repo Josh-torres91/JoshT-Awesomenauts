@@ -13,6 +13,10 @@ game.resources = [
     {name: "exp-screen", type: "image", src: "data/img/Reach_N2.jpg"},
     {name: "gold-screen", type: "image", src: "data/img/Dest_N5.png"},
     
+    {name: "load-screen", type: "image", src: "data/img/Reach_N2.jpg"},
+    {name: "new-screen", type: "image", src: "data/img/Dest_N5.png"},
+    
+    
     {name: "Reach_N1", type: "image", src: "data/img/Reach_N1.jpg"},
     /* Atlases 
      * @example
