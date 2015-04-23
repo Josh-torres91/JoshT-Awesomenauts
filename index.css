@@ -38,3 +38,10 @@ body {
   visibility: hidden;
 }
 
+#load{
+    visibility: hidden; 
+}
+
+#register{
+    visibility: hidden; 
+}

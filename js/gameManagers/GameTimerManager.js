@@ -23,7 +23,7 @@ game.GameTimerManager = Object.extend({
             // Math.round is a function that checks
             //  if we have a multiple of ten.
             this.lastCreep = this.now;
-            var creepe = me.pool.pull("EnemyCreep", 100, 0, {});
+            var creepe = me.pool.pull("EnemyCreep", 2488, 0, {});
             me.game.world.addChild(creepe, 2500);
         }
     }
