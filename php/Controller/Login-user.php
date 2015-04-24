@@ -21,16 +21,15 @@ if ($query->num_rows == 1) {
     if ($row["password"] === crypt($password, $row["salt"])) {
         $_SESSION["authenticated"] = true;
         $array["exp"] = $row["exp"];
-        
-       header("Location: " . $path . "index.php");
-        // The double equals sign checks
-        // if what's on the left is equal
-        // to what's on the right.
-        // The triple equals sign checks
-        // what the double equals checks
-        // but also checks if the data is
-        // of the same type.
+        $array["exp"] = $row["exp1"];
+        $array["exp"] = $row["exp2"];
+        $array["exp"] = $row["exp3"];
+        $array["exp"] = $row["exp4"];
+        $_SESSION["name"] = $username;
+        echo json_encode($array);
+    } else {
+        echo "<p>Invalid username and password</p>";
     }
 } else {
-    echo "<p>Invalid username and password2</p>";
+    echo "<p>Invalid username and password</p>";
 }
