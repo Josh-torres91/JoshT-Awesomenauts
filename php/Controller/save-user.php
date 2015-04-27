@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/../model/config.php");
+require_once(__DIR__ . "/../model/Config.php");
 
 $exp = filter_input(INPUT_POST, "exp", FILTER_SANITIZE_STRING);
 $exp1 = filter_input(INPUT_POST, "exp1", FILTER_SANITIZE_STRING);
@@ -21,6 +21,3 @@ if($query){
 }else{
     echo "<p>" . $_SESSION["connection"]->error . "</p>";
 }
-
-
-

@@ -32,7 +32,7 @@ require_once("php/controller/create-db.php");
 
             <div class='password'>
                 <label for='passsword'>Password</label>
-                <input type='text' name='password' id='password'>
+                <input type='password' name='password' id='password'>
             </div>
 
             <button type='button' id='register'>Register</button>
@@ -97,7 +97,7 @@ require_once("php/controller/create-db.php");
                 }
             });
         </script>
-        
+
         <script>
         $("#mainmenu").bind("click", function(){
             me.state.change(me.state.MENU);
@@ -106,13 +106,52 @@ require_once("php/controller/create-db.php");
            $.ajax({
                type: "POST",
                url: "php/controller/create-user.php",
+               data: {
+                   username: $('#username').val(),
+                   password: $('#password').val()   
+               },
+               dataType: "text"
            })
+           
+                .success(function(response){
+                    if(response ==="true"){
+                        me.state.change(me.state.PLAY);
+                    }
+                })
+                .fail(function(respontse){
+                    alert("Fail");
+                });
+        });
+        $("#load").bind("click", function(){
+           $.ajax({
+               type: "POST",
+               url: "php/controller/login-user.php",
+               data: {
+                   username: $('#username').val(),
+                   password: $('#password').val()   
+               },
+               dataType: "text"
+           })
+                .success(function(response){
+                    if(response ==="Invalid username and password"){
+                    alert(response);    
+                    
+                    }else{
+                        var data = jQuery.parseJSON(response);
+                        game.data.exp = data["exp"];
+                        game.data.exp1 = data["exp1"];
+                        game.data.exp2 = data["exp2"];
+                        game.data.exp3 = data["exp3"];
+                        game.data.exp4 = data["exp4"];
+                        me.state.change(me.state.SPENDEXP);
+                    }
+                })
+                .fail(function(respontse){
+                    alert("Fail");
+                });
         });
       
         </script>
-        
-        
-        
         <!-- SCM Music Player http://scmplayer.net -->
         <script type="text/javascript" src="http://scmplayer.net/script.js" 
         data-config="{'skin':'skins/black/skin.css','volume':50,'autoplay':true,'shuffle':false,'repeat':1,'placement':'bottom','showplaylist':false,'playlist':[{'title':'Spartans%27 Regret','url':'<iframe width=%22560%22 height=%22315%22 src=%22https://www.youtube.com/embed/YuUREENIYjE%22 frameborder=%220%22 allowfullscreen></iframe>'},{'title':'Heavy Price Paid','url':'<iframe width=%22560%22 height=%22315%22 src=%22https://www.youtube.com/embed/MoHCpa4rG7I?list=PLC7DFC1FA9633E0EC%22 frameborder=%220%22 allowfullscreen></iframe>'}]}" ></script>

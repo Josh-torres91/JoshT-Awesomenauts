@@ -15,3 +15,9 @@ $query = $_SESSION["connection"]->query("CREATE TABLE users ("
         . "exp4 int(4),"
         . "PRIMARY KEY (id))");
 // The period combines all of the strings together.
+
+if($query){
+    echo "<p>Successfully created users table</p>";
+}else{
+    echo "<p>" . $_SESSION["connection"]->error . "</p>";
+}
