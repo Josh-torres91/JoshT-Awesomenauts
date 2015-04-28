@@ -61,6 +61,7 @@ game.PlayerEntity = me.Entity.extend({
         this.now = new Date().getTime();
         this.dead = this.checkIfDead();
         this.checkKeyPressedAndMove();
+        this.checkAbilityKeys();
         this.setAnimation();
         me.collision.check(this, true, this.collideHandler.bind(this), true);
         this.body.update(delta);
@@ -110,6 +111,16 @@ game.PlayerEntity = me.Entity.extend({
         console.log("jump"); 
         this.body.jumping = true;
         this.body.vel.y -= this.body.accel.y * me.timer.tick;
+    },
+    
+    checkAbility: function(){
+        if(me.input.isKeyPressed("Upgrade1")){
+         
+        }else if(me.input.isKeyPressed("skill2")){
+            
+        }else if(me.input.isKeyPressed("skill3")){
+            
+        }
     },
     
     setAnimation: function() {

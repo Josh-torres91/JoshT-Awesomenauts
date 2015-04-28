@@ -47,7 +47,6 @@ game.EnemyCreep = me.Entity.extend({
 
         this.body.update(delta);
 
-
         this._super(me.Entity, "update", [delta]);
         return true;
     },

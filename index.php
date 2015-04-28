@@ -152,9 +152,5 @@ require_once("php/controller/create-db.php");
         });
       
         </script>
-        <!-- SCM Music Player http://scmplayer.net -->
-        <script type="text/javascript" src="http://scmplayer.net/script.js" 
-        data-config="{'skin':'skins/black/skin.css','volume':50,'autoplay':true,'shuffle':false,'repeat':1,'placement':'bottom','showplaylist':false,'playlist':[{'title':'Spartans%27 Regret','url':'<iframe width=%22560%22 height=%22315%22 src=%22https://www.youtube.com/embed/YuUREENIYjE%22 frameborder=%220%22 allowfullscreen></iframe>'},{'title':'Heavy Price Paid','url':'<iframe width=%22560%22 height=%22315%22 src=%22https://www.youtube.com/embed/MoHCpa4rG7I?list=PLC7DFC1FA9633E0EC%22 frameborder=%220%22 allowfullscreen></iframe>'}]}" ></script>
-        <!-- SCM Music Player script end -->
     </body>
 </html>

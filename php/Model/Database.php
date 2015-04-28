@@ -14,6 +14,7 @@ class Database {
 //    the Create-db file.
 
     public function __construct($host, $username, $password, $database) {
+        
 //    The construct variable
 //    creates or constructs a new
 //    database.
@@ -23,7 +24,7 @@ class Database {
         $this->password = $password;
         $this->database = $database;
 
-        $this->connection = new mysqli($host, $username, $password, $database);
+        $this->connection = new mysqli($host, $username, $password);
 
         if ($this->connection->connect_error) {
             die("<p>Error: " . $this->connection->connect_error . "</p>");
