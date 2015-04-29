@@ -13,6 +13,7 @@ game.resources = [
     {name: "title-screen", type: "image", src: "data/img/Reach_N3.jpg"},
     {name: "exp-screen", type: "image", src: "data/img/Reach_N2.jpg"},
     {name: "gold-screen", type: "image", src: "data/img/Dest_N5.png"},
+    {name: "spear", type: "image", src: "data/img/spear.png"},
     
     {name: "load-screen", type: "image", src: "data/img/Dest_N2.jpg"},
     {name: "new-screen", type: "image", src: "data/img/Dest_N6.jpg"},
