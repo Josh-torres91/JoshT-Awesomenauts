@@ -112,8 +112,8 @@ game.PlayerEntity = me.Entity.extend({
         }
     },
     spartanThrow: function() {
-    if(this.lastSpear >= game.data.spearTimer && game.data.Upgrade3 >= 0){   this.lastSpear = this.now;
-        var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {});
+    if((this.now-this.lastSpear) >= game.data.spearTimer*1000 && game.data.Upgrade3 > 0){   this.lastSpear = this.now;
+        var spear = me.pool.pull("spear", this.pos.x, this.pos.y, {}, this.facing);
         me.game.world.addChild(spear, 10);
     }
     },
