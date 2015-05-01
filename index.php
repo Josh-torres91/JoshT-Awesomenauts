@@ -17,8 +17,6 @@ require_once("php/controller/create-db.php");
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-
-
     </head>
     <body>
         <!-- Canvas placeholder -->
@@ -57,7 +55,7 @@ require_once("php/controller/create-db.php");
         <script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
         <script type="text/javascript" src="js/gameManagers/GameManager.js"></script>
         <script type="text/javascript" src="js/gameManagers/GameTimerManager.js"></script>
-        <script type="text/javascript" src="js/gameManagers/SpendGold .js"></script>
+        <script type="text/javascript" src="js/gameManagers/SpendGold.js"></script>
         <script type="text/javascript" src="js/gameManagers/HeroDeathManager.js"></script>
         <script type="text/javascript" src="js/entities/EnemyCreep.js"></script>
         <script type="text/javascript" src="js/entities/HUD.js"></script>
@@ -103,6 +101,7 @@ require_once("php/controller/create-db.php");
             me.state.change(me.state.MENU);
         });
         $("#register").bind("click", function(){
+            console.log("registering");
            $.ajax({
                type: "POST",
                url: "php/controller/create-user.php",
@@ -114,11 +113,13 @@ require_once("php/controller/create-db.php");
            })
            
                 .success(function(response){
-                    if(response ==="true"){
+                    if(response ==="True"){
                         me.state.change(me.state.PLAY);
+                    }else{
+                        alert(response);
                     }
                 })
-                .fail(function(respontse){
+                .fail(function(response){
                     alert("Fail");
                 });
         });
@@ -146,7 +147,7 @@ require_once("php/controller/create-db.php");
                         me.state.change(me.state.SPENDEXP);
                     }
                 })
-                .fail(function(respontse){
+                .fail(function(response){
                     alert("Fail");
                 });
         });
